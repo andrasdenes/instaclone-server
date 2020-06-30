@@ -1,2 +1,2 @@
 # instaclone-server
-Instagram clone, hobby
+Instagram clone, hobby, MERN
