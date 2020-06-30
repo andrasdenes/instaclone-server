@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 require("dotenv/config");
-require("./models/user");
 
 //PORT
 const port = process.env.PORT || 5000;
@@ -23,12 +22,19 @@ mongoose.connection.on("error", (err) => {
   console.log("error connecting", err);
 });
 
+//Models
+require("./models/user");
+require("./models/post");
+
+//MW
+app.use(express.json());
+
 //Routes
 const authRoute = require("./routes/auth");
 app.use("/auth", authRoute);
 
-//MW
-app.use(express.json());
+const postRoute = require("./routes/post");
+app.use("/post", postRoute);
 
 //Listen
 app.listen(port, () => {
