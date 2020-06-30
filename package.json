@@ -1,0 +1,27 @@
+{
+  "name": "instaclone-server",
+  "version": "1.0.0",
+  "description": "Instagram clone, hobby",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrasdenes/instaclone-server.git"
+  },
+  "author": "Andras Denes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrasdenes/instaclone-server/issues"
+  },
+  "homepage": "https://github.com/andrasdenes/instaclone-server#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.20",
+    "nodemon": "^2.0.4"
+  }
+}
