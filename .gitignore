@@ -128,3 +128,4 @@ dist
 # Custom
 ./node_modules
 keys.js
+.env
