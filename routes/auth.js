@@ -12,21 +12,21 @@ router.post("/signup", (req, res) => {
   if (!email || !password || !name) {
     return res
       .status("422")
-      .json({ message: "Password, email or name not filled in." });
+      .json({ error: "Password, e-mail or name not filled in." });
   } else {
     User.findOne({ email: email })
       .then((savedUser) => {
         if (savedUser) {
           return res
             .status("422")
-            .json({ message: "User with that e-mail address already exists" });
+            .json({ error: "User with that e-mail address already exists" });
         } else {
           bcrypt.hash(password, 12).then((hash) => {
             const user = new User({ email, name, password: hash });
             user
               .save()
-              .then((user) => {
-                res.json({ message: "Saved user", userId: user._id });
+              .then(() => {
+                res.json({ message: "Saved user succesfully" });
               })
               .catch((err) => console.log(err));
           });
@@ -41,11 +41,11 @@ router.post("/signup", (req, res) => {
 router.post("/signin", (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    return res.status(422).json({ message: "E-mail or password not provided" });
+    return res.status(422).json({ error: "E-mail or password not provided" });
   } else {
     User.findOne({ email: email }).then((savedUser) => {
       if (!savedUser) {
-        return res.status(400).json({ message: "Invalid e-mail or password" });
+        return res.status(400).json({ error: "Invalid e-mail or password" });
       } else {
         bcrypt
           .compare(password, savedUser.password)
@@ -56,7 +56,8 @@ router.post("/signin", (req, res) => {
                 { _id: savedUser._id },
                 process.env.JWT_SECRET
               );
-              return res.json({ token });
+              const { _id, name, email } = savedUser;
+              return res.json({ token, user: { _id, name, email } });
             } else {
               return res
                 .status(400)
