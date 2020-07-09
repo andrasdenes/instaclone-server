@@ -61,7 +61,7 @@ router.post("/signin", (req, res) => {
             } else {
               return res
                 .status(400)
-                .json({ message: "Invalid e-mail or password" });
+                .json({ error: "Invalid e-mail or password" });
             }
           })
           .catch((err) => console.log(err));
